@@ -1,9 +1,5 @@
 pipeline {
     agent any 
-    environment {
-        JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
-        PATH = "$JAVA_HOME/bin:$PATH"
-          }
     stages {
         stage('Code-Pull'){
             steps{
@@ -14,9 +10,6 @@ pipeline {
             steps{
                 sh '''
                     cd FlightReservationApplication
-                    export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
-                    export PATH=$JAVA_HOME/bin:$PATH
-                    java -version
                     mvn clean package 
                 '''
             }
