@@ -39,6 +39,11 @@ pipeline {
             steps{
                 sh '''
                     cd FlightReservationApplication
+                    # Apply namespace first
+                    kubectl apply -f k8s/ns.yaml
+                    # Wait for namespace to become active
+                    kubectl wait --for=condition=Active namespace/flight-reservation
+                    # Apply all other manifests
                     kubectl apply -f k8s/
                 '''
             }
